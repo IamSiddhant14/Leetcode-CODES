@@ -46,12 +46,16 @@
 class Solution {
     public int[] countBits(int num) {
         
-        int[]arr = new int[num+1];
-        
-        for(int n=1;n<=num;n++){
-            arr[n] = arr[(n&(n-1))]+1;
-        }
-        
-        return arr;
-    }
+int[] ans = new int[num + 1];
+ans [0] = 0;
+for(int i = 1; i <= num; i++){
+   if(i %2 == 0){
+       ans[i] = ans [i/2];
+   }else{
+       ans[i] = ans[i - 1] + 1;
+   }
 }
+                           
+return ans;
+    
+}}
