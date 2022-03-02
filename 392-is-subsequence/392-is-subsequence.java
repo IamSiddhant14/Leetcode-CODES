@@ -7,6 +7,9 @@ class Solution {
             
             if( j<s.length() && s.charAt(j) == t.charAt(i)  ){
                 j++;
+                if( j == s.length()){
+                     break;
+                }
             }
         }
         
