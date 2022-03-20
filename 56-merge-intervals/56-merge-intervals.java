@@ -17,7 +17,7 @@ class Solution {
             int[] a = st.peek();
             int[] b = arr[i];
             
-            if( a[1]>= b[0]){
+            if( a[1]>= b[0] ){ //This check is to detemine whether there was an interation or not
             
                 int[] ans = new int[2];
                 
