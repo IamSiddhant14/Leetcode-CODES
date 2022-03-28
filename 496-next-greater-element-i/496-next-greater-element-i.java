@@ -1,44 +1,44 @@
 class Solution {
-    
-
-    public static int nge(int[] arr , int idx , int n){
-    
-        for( int i = idx+1; i<arr.length ; i++){
-            
-            if( arr[i] > n ){
-              return arr[i];
-            }
-            
-        }
-
-        return -1;
-        
-    }
     public int[] nextGreaterElement(int[] nums1, int[] nums2) {
         
+        int[] a = ngl(nums2);
+        HashMap<Integer, Integer> hm = new HashMap<>();
         
+        for( int i =0; i<nums2.length; i++){
+            hm.put(nums2[i] , a[i]);
+        }
         
         for( int i =0; i<nums1.length ; i++){
-            
-            int idx = -1;
-            int n = nums1[i];
-            
-            for( int j =0; j<nums2.length ; j++){
-                
-                if( nums2[j] == n){
-                   idx = j;
-                   int ans = nge( nums2 , idx , n);
-                    
-                    nums1[i] = ans;
-                    break;
-                }
-                
-            }
+            nums1[i] = hm.get(nums1[i]);
         }
         
         return nums1;
         
         
+    }
+    
+    
+    public static int[] ngl( int[] arr ){
+        
+        Stack<Integer> st = new Stack<>();
+        int[] ans = new int[arr.length];
+        
+        Arrays.fill(ans , -1);
+        
+        for( int i = 0; i<arr.length ; i++){
+            
+            while( st.size() > 0 && arr[st.peek()] < arr[i] ){
+                
+                int idx = st.pop();
+                ans[idx] = arr[i];
+                
+            }
+            
+            st.push(i);
+
+        }
+        
+        return ans;
         
     }
 }
