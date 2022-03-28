@@ -1,25 +1,29 @@
 class Solution {
-    
-    public static int[] nsor (int[] arr){
+    public int largestRectangleArea (int[] heights) {
         
-        int[] ans = new int[arr.length];
+        int[] nsl = nsol(heights) ;
+        int[] nsr = nsor(heights) ;
         
-        Arrays.fill(ans , arr.length);
-        Stack<Integer> st = new Stack <>();
+        int maxim = Integer.MIN_VALUE;
         
-        for( int i = 0; i<arr.length ; i++){
+        for( int i =0; i<heights.length ; i++){
             
-            while( st.size() != 0 && arr[st.peek()] > arr[i] ){
-                int idx = st.pop();
-                ans[idx] = i;
-                
-            }
+            int width = nsr[i] - nsl[i] -1;
             
-            st.push(i);
+            int a1 = heights[i]*width;
+            int a2 = heights[i]*1;
+            
+            int a = Math.max(a1 , a2);
+            maxim = Math.max(a , maxim);
             
         }
         
-        return ans;
+        return maxim;
+        
+        
+        
+        
+        
         
         
     }
@@ -27,57 +31,46 @@ class Solution {
     public static int[] nsol (int[] arr){
         
         int[] ans = new int[arr.length];
+        Stack<Integer> st = new Stack<>();
         
         Arrays.fill(ans , -1);
-        Stack<Integer> st = new Stack <>();
         
         for( int i = arr.length-1; i>= 0 ; i--){
             
-            while( st.size() != 0 && arr[st.peek()] > arr[i] ){
+            while( st.size()!= 0 && arr[st.peek()] > arr[i] ){
                 int idx = st.pop();
                 ans[idx] = i;
-                
             }
             
             st.push(i);
-            
         }
         
         return ans;
-        
+
+    
     }
     
     
-    public int largestRectangleArea(int[] heights) {
+    public static int[] nsor (int[] arr){
         
-        int[] nsr = nsor( heights );
-        int[] nsl = nsol( heights );
+        int[] ans = new int[arr.length];
+        Stack<Integer> st = new Stack<>();
         
-//         for( int ele : nsr ){
-//              System.out.print("  " +ele);
-//         }
-//         System.out.println();
+        Arrays.fill(ans , arr.length);
         
-//         for( int ele : nsl ){
-//              System.out.print("  " +ele);
-//         }
-        
-        
-        
-        int Max = Integer.MIN_VALUE;
-        
-        for( int i =0; i < heights.length ; i++){
+        for( int i = 0; i<arr.length ; i++){
             
-            int width = nsr[i] - nsl[i] - 1; //This is used to determine the width
-            int area = heights[i] * width ;
+            while( st.size()!= 0 && arr[st.peek()] > arr[i] ){
+                int idx = st.pop();
+                ans[idx] = i;
+            }
             
-            Max = (int)Math.max(area , Max);
-             
+            st.push(i);
         }
         
-        return Max;
-        
-        
-        
+        return ans;
+
+
+    
     }
 }
