@@ -31,7 +31,7 @@ class Solution {
             }
         }
         
-       score = 0;                 
+        score = 0;                 //()()
         while( st.size() > 0 ){
              score += st.pop();
                        
