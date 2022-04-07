@@ -4,7 +4,7 @@ class Solution {
     public ArrayList<String> al = new ArrayList<>();
     public List<String> letterCasePermutation (String s) {
         
-       
+          // ArrayList<String> al = new ArrayList<>();
          letterper(s , "");
          return al;
         
