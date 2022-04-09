@@ -1,76 +1,71 @@
 class Solution {
-    public int largestRectangleArea (int[] heights) {
+    public int largestRectangleArea(int[] heights) {
         
-        int[] nsl = nsol(heights) ;
-        int[] nsr = nsor(heights) ;
+        int[] r = nsr (heights);
+        int[] l = nsl (heights);
+        int maxA = Integer.MIN_VALUE;
         
-        int maxim = Integer.MIN_VALUE;
-        
-        for( int i =0; i<heights.length ; i++){
+        for( int i = 0 ; i<heights.length ; i++){
             
-            int width = nsr[i] - nsl[i] -1;
-            
-            int a1 = heights[i]*width;
-            int a2 = heights[i]*1;
-            
-            int a = Math.max(a1 , a2);
-            maxim = Math.max(a , maxim);
-            
+            int width = r[i] - l[i] - 1;
+            maxA = Math.max(maxA , (width * heights[i]) ); 
+            maxA = Math.max(maxA , (1 * heights[i]) ); 
         }
         
-        return maxim;
-        
-        
-        
-        
-        
-        
-        
+        return maxA ;
+
     }
     
-    public static int[] nsol (int[] arr){
+    
+    public int[] nsl( int[] arr ){
         
-        int[] ans = new int[arr.length];
+        int n = arr.length ;
+        
         Stack<Integer> st = new Stack<>();
+        int[] ans = new int[n];
         
-        Arrays.fill(ans , -1);
+        Arrays.fill( ans , -1 );
         
-        for( int i = arr.length-1; i>= 0 ; i--){
+        for(int i = n-1 ; i >= 0 ; i-- ){
             
-            while( st.size()!= 0 && arr[st.peek()] > arr[i] ){
-                int idx = st.pop();
-                ans[idx] = i;
-            }
+           while( st.size() != 0 && arr[st.peek()] > arr[i] ){
+               
+               int idx = st.pop();
+               ans[idx] = i;
+           }
             
             st.push(i);
+              
         }
         
         return ans;
 
-    
     }
     
     
-    public static int[] nsor (int[] arr){
+    public int[] nsr( int[] arr ){
         
-        int[] ans = new int[arr.length];
+        int n = arr.length ;
+        
         Stack<Integer> st = new Stack<>();
+        int[] ans = new int[n];
         
-        Arrays.fill(ans , arr.length);
+        Arrays.fill( ans , arr.length );
         
-        for( int i = 0; i<arr.length ; i++){
+        for(int i = 0 ; i < n ; i++ ){
             
-            while( st.size()!= 0 && arr[st.peek()] > arr[i] ){
-                int idx = st.pop();
-                ans[idx] = i;
-            }
+           while( st.size() != 0 && arr[st.peek()] > arr[i] ){
+               
+               int idx = st.pop();
+               ans[idx] = i;
+           }
             
             st.push(i);
+              
         }
         
         return ans;
-
-
-    
+        
     }
+    
 }
