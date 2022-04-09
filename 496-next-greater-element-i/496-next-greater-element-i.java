@@ -7,6 +7,7 @@ class Solution {
         
         for( int i = 0; i<nums2.length ; i++ ){
 
+            // hm.put( nums2[i] , nums2[a[i]] );
             hm.put( nums2[i] , a[i] );
         }
         
