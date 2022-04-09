@@ -1,49 +1,39 @@
 class Solution {
     public boolean isValid(String s) {
         
-        Stack <Character> st = new Stack<>();
+        Stack<Character> st = new Stack<>();
         
-        for( char ele : s.toCharArray() ){
-           
-            
-            if( ele == '('  || ele == '[' || ele == '{' ){
-                st.push(ele);
-                
-            }else{
-                
-                if( st.size() == 0 ){
-                    return false;
-                }
-                
-                if( ele == ')' ){
-                
-                      if(st.peek() != '('){
-                         return false;
-                      }
+        for( char c : s.toCharArray()){
 
-                }else if( ele == ']'){
-                
-                     if(st.peek() != '['){
+           if( c == '(' || c == '{' || c == '[' ){
+               st.push(c);
+               
+           }else {
+               if( st.size() == 0 ){
+                   return false;
+               }
+               
+               if( c == ')' ){
+                    if( st.peek() != '(' ){
                          return false;
-                      }
-                
-                }else if( ele == '}'){
-                
-                      if(st.peek() != '{'){
-                           return false;
-                       }
-                
-                
-                }
-                
-                st.pop();
-                
-            }
-       
+                    }
+               }else if( c == '}'){
+                    if( st.peek() != '{' ){
+                         return false;
+                    }                   
+               }else if( c == ']'){
+                    if( st.peek() != '[' ){
+                         return false;
+                    }                   
+               }
+               
+               st.pop();
+           
+           }
         
         }
         
-        return st.size()== 0;
+        return st.size() == 0;
+        
     }
-    
 }
