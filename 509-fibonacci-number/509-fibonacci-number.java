@@ -1,30 +1,17 @@
 class Solution {
     public int fib(int n) {
+        if( n == 0) return 0;
+        if( n == 1) return 1;
         int[] dp = new int[n+1];
-        Arrays.fill( dp , -1);
         
-        return fibAns( n , dp );
+        dp[0] = 0; dp[1] = 1;
+        
+        for( int i =2; i< dp.length ; i++ ){
+             dp[i] = dp[i-1] +dp[i-2];
+        }
+        
+        return dp[n];
+        
     }
     
-    public int fibAns( int n , int[] dp ){
-       
-        if( n == 0 ){
-           return 0; 
-        }
-         
-        if( n == 1 ){
-            return 1; 
-        }
-        
-        if ( dp[n] != -1 ){
-            return dp[n];
-        }
-        
-        int n1 = fibAns( n-1 , dp );
-        int n2 = fibAns( n-2 , dp );
-        
-        dp[n] = n1+n2;
-        
-        return n1+n2;
-    }
 }
