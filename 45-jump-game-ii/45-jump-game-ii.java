@@ -4,9 +4,15 @@ class Solution {
         int[] dp = new int[nums.length+1];
         Arrays.fill( dp , -1);
         
-        return getAns( 0 , nums , dp);
-        
+        int res = getAns( 0 , nums , dp);
+        // for(int i:dp)
+        //     System.out.print(i+" ");
+        return res;
     }
+//     [2,3,0,1,4]
+    // (0)
+    // (1)
+    // (2)
     
     public int getAns( int n , int[] nums , int[] dp ){
         
@@ -16,7 +22,7 @@ class Solution {
         
         if( dp[n] != -1 ) return dp[n];
         
-        long ans = 9999;
+        long ans = Integer.MAX_VALUE;
         
         for( int i = 1; i<=nums[n] ; i++ ){
             
@@ -27,9 +33,9 @@ class Solution {
             
         }
         
-        dp[n] = (int)ans+1;
-        
-        return (int)ans+1;
+        dp[n] = ans == Integer.MAX_VALUE? (int)ans: (int)ans+1;
+        // System.out.print(dp[n]+".."+n+" ");
+        return (ans == Integer.MAX_VALUE? (int)ans: (int)ans+1);
         
         
     }
