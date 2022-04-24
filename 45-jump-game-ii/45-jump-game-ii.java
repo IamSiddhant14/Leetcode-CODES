@@ -16,7 +16,7 @@ class Solution {
         
         if( dp[n] != -1 ) return dp[n];
         
-        int ans = 9999;
+        long ans = 9999;
         
         for( int i = 1; i<=nums[n] ; i++ ){
             
@@ -27,9 +27,9 @@ class Solution {
             
         }
         
-        dp[n] = ans+1;
+        dp[n] = (int)ans+1;
         
-        return ans+1;
+        return (int)ans+1;
         
         
     }
