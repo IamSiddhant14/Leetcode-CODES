@@ -6,10 +6,8 @@ class Solution {
             
             if( i > reach ) return false;
             
-            int temp = i+nums[i];
-            
-            if( reach <= temp ){
-               reach = temp;
+            if( reach <= i+nums[i]){
+               reach = i+nums[i];
             }
         }
         return true;
