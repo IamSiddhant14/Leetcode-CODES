@@ -1,31 +1,30 @@
 class Solution {
     public int jump(int[] nums) {
         
-        long[] dp = new long[nums.length+1];
-        Arrays.fill( dp , -1);
+        long [] dp = new long[nums.length + 1];
+        Arrays.fill( dp , -1 );
         
-        return (int)memorize( 0 , dp , nums);
+        return (int)(help( 0 ,nums , dp ));
         
     }
     
-    public static long memorize(int n , long[] dp , int[] nums){
+    public static long help( int n , int[] nums , long[] dp ){
         
-        if( n == nums.length -1 ) return 0;
-        
-        if( dp[n] != -1) return dp[n];
+        if( n == nums.length-1 ){
+            return 0;
+        }
         
         long ans = Integer.MAX_VALUE;
         
-        for( int i =1; i<=nums[n] ; i++){
+        if( dp[n] != -1 ) return dp[n];
+        
+        for( int i = 1; i<= nums[n] ; i++ ){
             
-            if( n+i <= nums.length -1 ){
-                ans = Math.min( ans , memorize( n+i , dp , nums )+1);
-            }
+            if( n + i <= nums.length-1 ){
+                 ans = Math.min( ans , help( n+i , nums , dp)+1 );
+            }  
         }
         
-        dp[n] = ans;
-        
-        return ans;
-        
+        return dp[n] = ans;
     }
 }
