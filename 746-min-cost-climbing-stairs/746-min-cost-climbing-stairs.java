@@ -12,7 +12,11 @@ class Solution {
     
     public int help (int n , int[] cost , int[] dp  ){
         
-        if( n == cost.length ){
+//         if( n == cost.length-1 ){
+//            return cost[n];
+//         }
+        
+        if( n >= cost.length ){
            return 0;
         }
         
