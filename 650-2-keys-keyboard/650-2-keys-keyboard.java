@@ -16,7 +16,7 @@ class Solution {
         
     }
     
-    public long memo(int screen ,int buffer , int dest , long[][] dp ){
+    public long memo(int screen ,int buffer , long dest , long[][] dp ){
         
         if( screen > dest  ) return Integer.MAX_VALUE;
         if( screen == dest ) return 0;
