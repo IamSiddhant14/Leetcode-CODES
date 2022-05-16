@@ -20,9 +20,9 @@ class Solution {
 
         for( int i=1; i<= nums[idx]; i++){
             
-            if( idx+i <= nums.length - 1 ){
+            // if( idx+i <= nums.length - 1 ){
                 ans = Math.min( ans , help(idx+i , nums , dp)+1l);
-            }
+            // }
         }
         
         return dp[idx] = ans;
