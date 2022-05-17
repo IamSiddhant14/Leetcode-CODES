@@ -25,28 +25,24 @@ class GFG {
 
 class Solution {
     
-    long memo( int noOfDigits , int prevDigit , long[][] dp ){
+    long countStrings(int n) {
         
-        if( noOfDigits == 0 ) return 1;//empty String
-        
-        if( dp[noOfDigits][prevDigit] != 0 ) return dp[noOfDigits][prevDigit] ;
-        
-        long appending0 = memo(noOfDigits -1 , 0 , dp );
-        long appending1 = ( prevDigit == 0 ) ? memo( noOfDigits-1 , 1 , dp ) : 0l ;
-        
-        
-        return dp[noOfDigits][prevDigit] = (appending0+appending1 )% 1000000007 ; //this to to avoid answers in long
+        long [][] dp = new long [n+1][2];
+        return help( n, 0 , dp );
         
     }
     
-    
-    
-    long countStrings(int n) {
+    long help( int n , int prev ,long [][] dp ){
         
-        // if( n == 0 ) return 1;
+        if( n == 0 ) return 1l ;
         
-        long[][] dp = new long[n+1][2];
-        return memo(n , 0 , dp);
+        if( dp[n][prev] != 0 ) return dp[n][prev] ;
+        
+        long append0 =  help( n-1 , 0 , dp) ;
+        long append1 =  (prev != 1 ) ? help( n-1 , 1 , dp ) : 0 ;
+        
+        return dp[n][prev] = (append0 + append1) % 1000000007 ;
 
     }
 }
+
