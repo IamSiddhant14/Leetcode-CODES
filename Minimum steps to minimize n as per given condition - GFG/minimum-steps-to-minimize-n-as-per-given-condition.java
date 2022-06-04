@@ -22,28 +22,29 @@ class GfG
 
 class Solution{
 
-	public int minSteps(int N) 
+	public int minSteps(int n) 
 	{ 
-	    int[] dp = new int[N+1];
-	    Arrays.fill( dp , -1);
-	    
-	    return help( N , dp );
+
+	    int[] dp = new int[n+1];
+	    Arrays.fill( dp , -1 );
+
+	    return ans( n , dp );
+
 	    
 	} 
 	
-	public int help( int n , int[] dp ){
+	public int ans( int n , int[] dp ){
 	    
-	    if( n == 1 ) return 0;
+        if( n == 1 ) return 0;
 	    
 	    if( dp[n] != -1 ) return dp[n];
 	    
-	    int a1 = ( n % 2 == 0 ) ? help( n/2 , dp ) : Integer.MAX_VALUE;
-	    int a2 = ( n % 3 == 0 ) ? help( n/3 , dp ) : Integer.MAX_VALUE;
-	    int a3 = ( n - 1 >= 1 ) ? help( n-1 , dp ) : Integer.MAX_VALUE;
+	    int a1 = ( n % 2 == 0) ? ans(n/2 , dp ) : Integer.MAX_VALUE;
+	    int a2 = ( n % 3 == 0) ? ans(n/3 , dp ) : Integer.MAX_VALUE;
+	    int a3 =  ans(n-1 , dp );
 	    
-	    return dp[n] = Math.min( a1 ,Math.min(a2 , a3))+1;
-	  
+	    dp[n] = Math.min( a1 , Math.min( a2 , a3 ))+1 ;
+	    
+	    return dp[n];
 	}
-	
-	
 }
