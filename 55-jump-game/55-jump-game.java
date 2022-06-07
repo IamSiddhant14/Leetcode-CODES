@@ -1,23 +1,23 @@
 class Solution {
     public boolean canJump(int[] nums) {
         
-        int currMax = 0;
+        int currR = 0;
         
-        for( int i = 0; i <= nums.length-1 ; i++){
+        for( int i = 0; i<nums.length ; i++ ){ 
             
-            if( currMax < i ){
-               return false;
+            if( currR < i ) return false ;
+            
+            int reach = i + nums[i];
+            
+            if( reach > currR ){
+               currR = i + nums[i];
             }
-            
-            currMax = Math.max( currMax , i+nums[i]); 
-            
+                
         }
         
-        if( currMax >= nums.length-1 ){
-            return true;
-        }
+        if( currR < nums.length-1)
+            return false;
         
-        return false;
-        
+        return true;
     }
 }
