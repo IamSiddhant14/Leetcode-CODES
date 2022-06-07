@@ -18,7 +18,7 @@ class Solution {
         
         if( dp[idx][taken] != -1 ) return dp[idx][taken];
         
-        int a1 = ( taken != 1 ) ? ans( nums , dp , 1 , idx+1 ) + nums[idx] : 0;
+        int a1 = ( taken == 0 ) ? ans( nums , dp , 1 , idx+1 ) + nums[idx] : 0;
         int a2 = ans( nums , dp , 0 , idx+1 );
         
         dp[idx][taken] = Math.max( a1 , a2 );
