@@ -1,37 +1,33 @@
 class Solution {
     public int jump(int[] nums) {
         
-        if( nums.length == 1 )return 0;
-        
-        
-        long[] dp = new long[nums.length+1];
+        long[] dp = new long[nums.length];
         Arrays.fill( dp , -1 );
         
-        ansA( nums , dp , 0 );
-        return (int)dp[0];
-
+        return (int) ans( nums, 0 , dp );
+        
     }
     
-    public long ansA ( int[] nums , long[] dp , int j){
+    public long ans( int[] nums , int idx , long[] dp ){
         
-        if( j >= nums.length-1 ){
-            return 0;
-        }
+        if( idx >= nums.length-1 ) return 0;
         
-        if( dp[j] != -1 ) return dp[j];
-        long ans = Integer.MAX_VALUE;
+        // if( idx > nums.length-1 ) return Integer.MAX_VALUE;
         
-        for( int i = 1; i <= nums[j] ; i++ ){
+        if( dp[idx] != -1 ) return dp[idx];
+        
+        long a = Integer.MAX_VALUE;
+        
+        for( int i = 1; i<= nums[idx] ; i++ ){
             
-            if( j+i <= nums.length-1 ){
-               ans = Math.min( ans , ansA( nums , dp , j+i ) + 1l);
+            if( i+idx <= nums.length -1 ){
+                a = Math.min( a , ans( nums , idx+i ,dp )+ 1l ) ;
             }
             
-        } 
-        
-        dp[j] = ans;
-        
-        return dp[j] ;
-        
+        }
+    
+        dp[idx] = a;
+        return dp[idx];
+    
     }
 }
