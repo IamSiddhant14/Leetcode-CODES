@@ -18,34 +18,31 @@ class GFG {
 
 
 class Solution {
-    
     static Long numberOfWays(int N) {
         
-        if( N == 1 ){
-            return 1l;
-        }
-        
-        long[] dp = new long[N+1];
+        long [] dp = new long [N+1];// From 0 to N where each value corresponds to numbers of ways possible for the given number of tiles
         Arrays.fill( dp , -1 );
         
         return ans( N , dp );
-        
     }
     
-    static int mod = (int)(1e9+7);
+    static int mod = (int)(1e9 + 7);
     
-    static long ans( int n , long[] dp ){
+    static long ans ( int n , long[] dp ){
         
         if( n <= 2 ){
             return n;
         }
         
-        if( dp[n] != -1 ) return dp[n];
+        if( dp[n] != -1 ) {
+            return dp[n];
+        }
         
-        long v = ans( n-1 , dp );
-        long h = ans( n-2 , dp );
+        long a1 = ans( n-1 , dp );
+        long a2 = ans( n-2 , dp );
         
-        dp[n] = ( v+h ) % mod ;
-        return dp[n];
+        dp[n] = (a1 + a2 ) % mod ;
+        
+        return dp[n] ;
     }
-}
+};
