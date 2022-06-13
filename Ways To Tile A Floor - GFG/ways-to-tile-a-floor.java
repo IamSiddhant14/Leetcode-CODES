@@ -41,7 +41,7 @@ class Solution {
         long a1 = (n-1 >= 0 ) ? ans( n-1 , dp) : 0;
         long a2 = (n-2 >= 0 ) ? ans( n-2 , dp) : 0;
         
-        dp[n] = (a1 + a2 ) % mod ;
+        dp[n] = (a1 + a2 ) %(int)(1e9 + 7) ;
         
         return dp[n] ;
         
