@@ -12,7 +12,7 @@ class Solution {
         
         if( idx >= nums.length-1 ) return 0;
         
-        // if( idx > nums.length-1 ) return Integer.MAX_VALUE;
+        if( idx > nums.length-1 ) return Integer.MAX_VALUE;
         
         if( dp[idx] != -1 ) return dp[idx];
         
