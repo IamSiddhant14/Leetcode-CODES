@@ -1,37 +1,43 @@
 class Solution {
     public String frequencySort(String s) {
         
-        HashMap <Character,Integer> hm1 = new HashMap<>();
+        HashMap <Character , Integer> hm = new HashMap <>();
         
-        for( int i = 0; i<s.length() ; i++ ){
-             hm1.put( s.charAt(i) , hm1.getOrDefault(s.charAt(i) , 0 )+ 1);
+        for( int i = 0 ; i<s.length() ; i++ ){ 
+            char a = s.charAt(i);
+            hm.put( a , hm.getOrDefault(a , 0) + 1);   
         }
         
-        HashMap<Integer , ArrayList<Character> > hm2 = new HashMap<>();
+        HashMap <Integer , ArrayList<Character> > rev = new HashMap<>();
+        StringBuilder sb = new StringBuilder();
         
-        for( Character c : hm1.keySet() ){
+        for( char a : hm.keySet() ){
             
-           int v = hm1.get(c);
-           if( hm2.containsKey(v) == false ){
-               hm2.put( v , new ArrayList<>());
-           }
+            int v = hm.get(a);
+            if( rev.containsKey(v) == false ){
+                rev.put(v , new ArrayList<>() );
+            }
             
-           hm2.get(v).add(c);
+            rev.get(v).add(a);
+            
         }
         
-        StringBuilder res = new StringBuilder("");
-        for( int i = s.length(); i >= 1 ; i-- ){
-            if( hm2.containsKey(i) ){
-                for( Character ch : hm2.get(i) ){
-                    for( int j = 1; j <=i ; j++ ){
-                        res.append(ch);
+        for( int i = s.length() ; i>= 1; i-- ){
+            
+            if( rev.containsKey(i) ){
+                
+                for( Character a : rev.get(i) ){
+                    
+                    for( int j = 0; j<i ; j++ ){
+                        sb.append(a);
                     }
+                    
                 }
+                
             }
         }
         
-        return res.toString();
-        
-        
+        String ans = sb.toString();
+        return ans;
     }
 }
