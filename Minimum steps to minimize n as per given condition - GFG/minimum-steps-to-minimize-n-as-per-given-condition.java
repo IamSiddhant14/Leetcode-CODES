@@ -24,12 +24,14 @@ class Solution{
 
 	public int minSteps(int N) 
 	{ 
-	    
+	    if( N == 1 ){
+	        return 0;
+	    }
 	    int[] dp = new int[N+1];
 	    Arrays.fill( dp , -1 );
 	    
-	    return  ans( N , dp );
-	   // dp[N];
+	    ans( N , dp );
+	    return dp[N];
 	} 
 	
 	int ans( int n , int[] dp ){
