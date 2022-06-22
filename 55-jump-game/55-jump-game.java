@@ -1,27 +1,26 @@
 class Solution {
-    
     public boolean canJump(int[] nums) {
-
-        int reach = 0;
         
-        for( int i = 0; i<nums.length ; i++ ){
+        int curr = 0;
+        
+        for( int i = 0 ; i<nums.length ; i++ ){
             
-            int currReach = i+nums[i];
-            
-            if( reach < i){
+            if(curr < i ){
                 return false;
             }
             
-            if( reach < currReach ){
-                reach = currReach ;
+            int currReach = i+nums[i];
+            
+            if( curr < currReach ){
+                curr = currReach;
             }
+            
         }
         
-        if( reach >= nums.length -1 ){
-             return true;
+        if( curr >= nums.length -1 ){
+            return true;
         }
         
         return false;
-        
     }
 }
