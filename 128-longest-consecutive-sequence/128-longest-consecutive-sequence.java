@@ -1,31 +1,78 @@
 class Solution {
-    public int longestConsecutive(int[] nums) {
-        if( nums.length == 0 ) return 0;
-        Arrays.sort( nums );
+    
+    int getans( int[] nums ){
         
-        int left = 0 , max = 1;
+        HashMap<Integer, Boolean> hm = new HashMap<>();
         
-        while( left < nums.length ){
+        for( int i = 0; i<nums.length ; i++ ){
+            hm.put( nums[i] , true );
+        }
+        
+        for( int i = 0; i<nums.length ; i++ ){
             
-            int right = left+1 , count = 1;
+            if( hm.containsKey(nums[i]-1) == true ){
+                hm.put( nums[i] , false );
+            }
+        }
+        
+        int max = 0;
+        
+        for( int ch : hm.keySet()){
             
-            while( right < nums.length && (nums[right-1] == nums[right] || nums[right-1]+1 == nums[right])){
+            if( hm.get(ch) == true ){
                 
-                if( nums[right-1] == nums[right]-1 ){
+                int count = 1;
+                
+                while( hm.containsKey(ch+count) ){
                     count++;
                 }
                 
-                right++;
+                max = Math.max( max , count);
+                
                 
             }
-            
-            max = Math.max( max , count);
-            left = right;
-            
             
         }
         
         return max;
         
+        
+        
     }
+    
+    public int longestConsecutive(int[] nums) {
+        
+       return  getans( nums );
+        
+       // Approch : 1
+//         if( nums.length == 0 ) return 0;
+//         Arrays.sort( nums );
+        
+//         int left = 0 , max = 1;
+        
+//         while( left < nums.length ){
+            
+//             int right = left+1 , count = 1;
+            
+//             while( right < nums.length && (nums[right-1] == nums[right] || nums[right-1]+1 == nums[right])){
+                
+//                 if( nums[right-1] == nums[right]-1 ){
+//                     count++;
+//                 }
+                
+//                 right++;
+                
+//             }
+            
+//             max = Math.max( max , count);
+//             left = right;
+            
+            
+//         }
+        
+//         return max;
+        
+    }
+    
+    
 }
