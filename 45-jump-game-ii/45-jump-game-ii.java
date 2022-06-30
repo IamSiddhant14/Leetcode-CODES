@@ -4,34 +4,34 @@ class Solution {
         long[] dp = new long[nums.length+1];
         Arrays.fill( dp , -1 );
         
-        return (int)ans( nums , dp , 0);
+        return (int)findAns( dp , nums , 0 );
         
     }
     
-    long ans( int[] nums , long[] dp , int idx ){
-
-        if( idx == nums.length-1  ){
+    static long findAns( long[] dp , int[] nums , int idx ){
+        
+        if( idx == nums.length-1 ){
             return 0;
         }
         
+        long minL = Integer.MAX_VALUE;
+        
         if( dp[idx] != -1 ) return dp[idx];
         
-        long a = Integer.MAX_VALUE;
         for( int i = 1; i <= nums[idx] ; i++ ){
-            
-            if( idx+i <= nums.length-1 ){
-                a = Math.min( a , ans(nums , dp , idx+i ) );
+            if( i+idx < nums.length ){
+                minL = Math.min( minL , findAns( dp , nums , idx+i ));
             }
-            
         }
         
-        dp[idx] = a+1l;
-        // if( a == Integer.MAX_VALUE ){
-        //     return a;
-        // }
+        dp[idx] = minL;
+            
+        if( minL < Integer.MAX_VALUE ){
+           dp[idx] = minL+1 ;
+        }
         
         return dp[idx];
+
+        
     }
-    
-    
 }
