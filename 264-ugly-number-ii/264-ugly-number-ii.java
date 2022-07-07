@@ -1,35 +1,37 @@
 class Solution {
     public int nthUglyNumber(int n) {
-        if( n == 1 ) return 1;
         
-        ArrayList<Integer> ugly = new ArrayList<>();
-         
-        int prev2 = 0 , prev3 = 0 , prev5 = 0;
-        ugly.add(1);// Adding 1 at zero index
+        int[] arr = new int[n];
         
-        for( int  i = 1; i<n ; i++ ){
+        int p1 = 0;
+        int p2 = 0;
+        int p3 = 0;
+        
+        arr[0] = 1;
+        
+        for( int i = 1; i<arr.length; i++ ){
             
-            int a = ugly.get(prev2) * 2;
-            int b = ugly.get(prev3) * 3;
-            int c = ugly.get(prev5) * 5;
             
-            int min = Math.min( a, Math.min(b , c));
-            ugly.add(min);
+            if( p1< arr.length && p2< arr.length && p3< arr.length){
+                
+                int v1 = arr[p1] * 2;
+                int v2 = arr[p2] * 3;
+                int v3 = arr[p3] * 5;
+                
+                int min = Math.min( v1 , Math.min( v2 , v3));
             
-            if( min == a ){
-                prev2++;
+            if( min == v1 ) p1++;
+            if( min == v2 ) p2++;
+            if( min == v3 ) p3++;
+            
+            arr[i] = min;
+            
             }
             
-            if( min == b ){
-                prev3++;
-            }
-            
-            if( min == c ){
-                prev5++;
-            }
+
         }
         
-        return ugly.get(n-1);
+        return arr[n-1];
         
     }
 }
