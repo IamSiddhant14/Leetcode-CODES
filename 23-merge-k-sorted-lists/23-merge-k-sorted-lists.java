@@ -10,12 +10,11 @@
  */
 class Solution {
     
-    public ListNode mergeToList( ListNode l1 , ListNode l2 ){
+    public ListNode merger( ListNode l1 , ListNode l2 ){
         
         ListNode ans = new ListNode(-1);
         ListNode h = ans;
         ListNode t = ans;
-        
         
         while( l1 != null && l2 != null ){
             
@@ -36,36 +35,41 @@ class Solution {
         
         if( l1 != null ){
             t.next = l1;
-        }else{
+        }
+        
+        if( l2 != null ){
             t.next = l2;
         }
+        
         
         return ans.next;
     }
     
-    public ListNode helper( ListNode[] lists , int left , int right ){
+    
+    
+    
+    public ListNode mergerHelper(ListNode[] lists , int left , int right ){
         
         if( left > right ) return null;
-        if( left == right ) return lists[left];
+        if( left == right ) return lists[right];
         
-        int mid = (left+right) / 2;
+        int mid = (left+right )/ 2;
         
-        ListNode l1 = helper( lists , left , mid );
-        ListNode l2 = helper( lists , mid+1 , right );
+        ListNode l1 = mergerHelper( lists , left , mid );
+        ListNode l2 = mergerHelper( lists , mid+1 , right);
         
-        return mergeToList( l1 , l2 );
+        ListNode ans = merger( l1 ,  l2 );
+        return ans;
         
     }
     
-    
-    
-    
-    
-    public ListNode mergeKLists (ListNode[] lists) {
+    public ListNode mergeKLists(ListNode[] lists) {
         
-        if( lists.length == 0 ) return null;
+        if( lists.length ==  0 ){
+            return null;
+        }
         
-        return helper( lists , 0 , lists.length-1 );
+       return mergerHelper( lists , 0 , lists.length -1 );
         
     }
 }
