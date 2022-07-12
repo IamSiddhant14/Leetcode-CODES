@@ -9,61 +9,64 @@
  * }
  */
 class Solution {
-     
+    
     public boolean isPalindrome(ListNode head) {
         
         if( head == null || head.next == null ){
             return true;
+        } 
+        
+        ListNode slow = head;
+        ListNode fast = head;
+        ListNode prev = null;
+        
+        while( fast != null && fast.next != null ){
+            prev = slow;
+            slow = slow.next;
+            fast = fast.next.next;
         }
         
-        ListNode mid = middle(head);
-        ListNode second = reverse(mid.next);
+        if( fast == null ){
+            slow = prev;
+        }
         
-        while( head != null && second != null){
+        ListNode rev = reverse(slow.next);
+        
+        while( head != null && rev != null ){
+                
+            if( head.val != rev.val ){
+                return false;
+            }
             
-            if( head.val != second.val ) return false;
             head = head.next;
-            second = second.next;
-            
+            rev = rev.next;
         }
+        
+        // if( head != null || rev != null ){
+        //     return false;
+        // }
         
         return true;
+        
+        
         
     }
     
     public ListNode reverse(ListNode head){
         
-        ListNode prev = null, curr = head;
+        ListNode prev = null;
+        ListNode curr = head;
         
         while( curr != null ){
             
             ListNode frw = curr.next;
             curr.next = prev;
             
-            prev = curr;
+            prev = curr; 
             curr = frw;
-            
         }
         
         return prev;
     }
-    
-    public ListNode middle (ListNode head ){
-        
-        ListNode slow = head , fast = head;
-        ListNode prev = null;
-        
-        while( fast != null && fast.next != null  ){
-            
-            prev = slow ;
-            slow = slow.next;
-            fast = fast.next.next;
-            
-        }
-        
-        if( fast == null )
-            return prev;
-        return slow;
-        
-    }
 }
+
