@@ -50,7 +50,7 @@ class Solution {
     
     public ListNode mergerHelper(ListNode[] lists , int left , int right ){
         
-        if( left > right ) return null;
+        // if( left > right ) return null;
         if( left == right ) return lists[right];
         
         int mid = (left+right )/ 2;
