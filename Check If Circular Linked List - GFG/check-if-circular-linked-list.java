@@ -95,7 +95,7 @@ class GfG
             s = s.next;
             f = f.next.next;
             
-            if( s==f){
+            if( s==f && s == head){
                 return true;
             }
         }
