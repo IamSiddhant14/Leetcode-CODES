@@ -8,11 +8,9 @@
  *     ListNode(int val, ListNode next) { this.val = val; this.next = next; }
  * }
  */
-
-
 class Solution {
     
-    public ListNode midNode(ListNode head){
+    public ListNode findMid(ListNode head){
         
         ListNode s = head;
         ListNode f = head;
@@ -22,7 +20,7 @@ class Solution {
             
             prev = s;
             s = s.next;
-            f = f.next.next;
+            f= f.next.next;
         }
         
         if( f == null ){
@@ -30,57 +28,64 @@ class Solution {
         }
         
         return s;
-        
+ 
     }
     
-    
-    public ListNode merge( ListNode l1 , ListNode l2 ){
+    public ListNode merger( ListNode l1 , ListNode l2 ){
         
         ListNode ans = new ListNode(-1);
-        ListNode h = ans;
         ListNode t = ans;
         
         while( l1 != null && l2 != null ){
             
             if( l1.val <= l2.val ){
-                t.next = l1;
-                l1 = l1.next;
+                
+              t.next = l1;
+              l1 = l1.next;
+                
             }else{
-                t.next = l2;
-                l2 = l2.next;
+                
+              t.next = l2;
+              l2 = l2.next; 
+                
             }
-            
-            t = t.next;  
+
+            t = t.next;
             
         }
         
-        if( l1 != null){
-            t.next= l1;
+        if( l1 != null ){
+            t.next = l1;
+            // l1.next = null;
+            
         }
         
         if( l2 != null ){
             t.next = l2;
+            // l2.next = null;
         }
         
         return ans.next;
         
     }
     
+    
     public ListNode sortList(ListNode head) {
         
-        if( head == null || head.next == null){
-           return head;
+        if( head == null || head.next == null ){
+            return head;
         }
         
-        ListNode mid = midNode(head);
+        ListNode mid = findMid(head);
         ListNode midNext = mid.next;
-        mid.next = null;
+        mid.next = null ;
         
-        ListNode a1 = sortList(head);
-        ListNode a2 = sortList(midNext);
         
-        return merge( a1 , a2 );
+        ListNode l = sortList(head);
+        ListNode r = sortList(midNext);
+        
+        
+        return merger( l , r );
+        
     }
-    
-    
 }
