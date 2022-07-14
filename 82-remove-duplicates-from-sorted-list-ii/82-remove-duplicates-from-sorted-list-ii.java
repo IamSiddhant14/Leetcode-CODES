@@ -34,7 +34,7 @@ class Solution {
             }else{
                 t.next = head;
                 t=t.next;
-                head = head.next;
+                head = curr;
             }
             
         }
