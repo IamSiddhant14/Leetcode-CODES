@@ -94,8 +94,6 @@ class Solution
         Node s = head;
         Node f = head;
         // System.out.println("here2");
-        Node curr = head;
-        Node prev = null;
         
         while( f != null && f.next != null ){
     
@@ -103,12 +101,6 @@ class Solution
             f=f.next.next;
             
             if( s == f ){
-
-                // while( s.data != curr.data ){
-                //     prev = s;
-                //     s=s.next;
-                //     curr=curr.next;
-                // }
                 break;
             }
         }
@@ -117,6 +109,7 @@ class Solution
     
         Node q = s.next;
         int dis = 1;
+        
         while(q != s ){
             dis++;
             q = q.next;
