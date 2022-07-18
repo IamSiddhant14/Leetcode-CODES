@@ -1,32 +1,36 @@
+
 class Solution {
     public List<List<Integer>> allPathsSourceTarget(int[][] graph) {
-       
-        List<List<Integer>> pairs = new ArrayList<>();
-        List<Integer> pair = new ArrayList<>();
         
         boolean[] vis = new boolean[graph.length];
-        DFS( 0 , graph.length-1 , graph , vis , pair , pairs );
+        List<List<Integer>> ans = new ArrayList<>();
         
-        return pairs;
+        List<Integer> temp = new ArrayList<>();
+        DFS( vis , graph , 0 , graph.length-1 , temp , ans );
+        
+        return ans;
+        
     }
     
-    public void DFS( int src , int dest , int[][] graph , boolean[] vis , List<Integer> pair , List<List<Integer>> pairs  ){
+    public void DFS( boolean[] vis , int[][] graph , int src , int dest , List<Integer> temp , List<List<Integer>> ans ){
         
         if( vis[src] == true ) return ;
-                
-        pair.add(src);
+        
         vis[src] = true;
+        temp.add(src);
         
         if( src == dest ){
-            pairs.add(new ArrayList(pair));// Deep copy is essential or else it will be ointing to the same node in which we are removing element            
-        };
-        
-        for( int v : graph[src]){
-            DFS( v , dest , graph , vis , pair , pairs );
+            ans.add(new ArrayList<>(temp));
+            // return;
+        }
+
+        for( int ele : graph[src]){
+            DFS( vis , graph , ele , dest , temp , ans);
         }
         
         vis[src] = false;
-        pair.remove( pair.size() -1 );
+        temp.remove(temp.size()-1);
         
-    }
+        return ;
+    }  
 }
