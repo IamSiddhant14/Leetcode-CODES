@@ -16,13 +16,13 @@ class Solution {
         
         if( vis[src] == true ) return ;
         
-        vis[src] = true;
         temp.add(src);
         
         if( src == dest ){
             ans.add(new ArrayList<>(temp));
-            // return;
+           
         }
+        vis[src] = true;
 
         for( int ele : graph[src]){
             DFS( vis , graph , ele , dest , temp , ans);
@@ -30,7 +30,7 @@ class Solution {
         
         vis[src] = false;
         temp.remove(temp.size()-1);
-        
+         return;
 
     }  
 }
