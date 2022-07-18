@@ -10,63 +10,67 @@
  */
 class Solution {
     
-    public boolean isPalindrome(ListNode head) {
-        
-        if( head == null || head.next == null ){
-            return true;
-        } 
+    public ListNode mid(ListNode head){
         
         ListNode slow = head;
         ListNode fast = head;
+        
         ListNode prev = null;
         
-        while( fast != null && fast.next != null ){
+        while( fast != null  && fast.next != null ){
             prev = slow;
             slow = slow.next;
             fast = fast.next.next;
         }
         
         if( fast == null ){
-            slow = prev;
+            return prev;
         }
         
-        ListNode rev = reverse(slow.next);
-        
-        while( head != null && rev != null ){
-                
-            if( head.val != rev.val ){
-                return false;
-            }
-            
-            head = head.next;
-            rev = rev.next;
-        }
-        
-        // if( head != null || rev != null ){
-        //     return false;
-        // }
-        
-        return true;
-        
-        
-        
+        return slow;
     }
     
-    public ListNode reverse(ListNode head){
+    public ListNode rev(ListNode node){
         
         ListNode prev = null;
-        ListNode curr = head;
+        ListNode curr = node;
         
         while( curr != null ){
             
             ListNode frw = curr.next;
             curr.next = prev;
             
-            prev = curr; 
+            prev = curr;
             curr = frw;
+            
         }
         
         return prev;
     }
+    
+    public boolean isPalindrome(ListNode head) {
+        
+        
+        ListNode m = mid(head);
+        ListNode midNext = m.next;
+        m.next = null;
+        
+        ListNode a1 = head;
+        ListNode a2 = rev(midNext);
+        
+        while( a1 != null && a2 != null ){
+            
+            if( a1.val != a2.val ){
+                return false;
+            }
+            
+            a1 = a1.next;
+            a2 = a2.next;
+        }
+        
+        return true;
+        
+        
+        
+    }
 }
-
