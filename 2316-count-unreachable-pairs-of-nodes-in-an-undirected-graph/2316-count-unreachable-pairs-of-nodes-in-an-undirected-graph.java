@@ -52,7 +52,7 @@ class Solution {
                 List<Integer> temp = new ArrayList<>();
                 DFS( temp , g , i , vis);
                 
-                count = count + (((n*1l) - temp.size() ) * temp.size() ) ;
+                count +=  (((n*1l) - temp.size() ) * temp.size() ) ;
             }
             
         }
