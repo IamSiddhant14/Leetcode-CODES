@@ -32,29 +32,31 @@ class Graph{
     
     public boolean BFS( int src , int dest ){
         
-        boolean[] vis = new boolean[adj.length];
-        
         Queue<Integer> q = new ArrayDeque<>();
         q.add(src);
         
+        boolean[] vi = new boolean[adj.length];
+        
         while( q.size() > 0 ){
             
-            int front = q.remove();
-            if( vis[front] == true ) continue;
+            int v = q.remove();
             
-            if( front == dest ) return true;
-            vis[front] = true;
+            if( vi[v] == true )  continue;
+            if( v == dest ) return true;
+            vi[v] = true;
             
-            for( int ele : adj[front]){
-                if( vis[ele] == false ){
-                     q.add(ele);
+            for( int ele : adj[v] ){
+                if( vi[ele] == false ){
+                    q.add(ele);
                 }
             }
-
+            
         }
         
         return false;
     }
+
+    
 }
 
 class Solution {
@@ -70,8 +72,6 @@ class Solution {
 //      boolean[] vis = new boolean[n];
 //      return g.DFS( source , vis , destination );
         
-        
-        return g.BFS(source , destination );
-        
+        return g.BFS( source , destination );
     }
 }
