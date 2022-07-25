@@ -11,14 +11,21 @@ class Solution {
                 
         if( src == dest ){
             ans.add(new ArrayList<>(temp));
+            vis[src] = false;
+            temp.remove(temp.size()-1 );
+            return;
         } 
         
         for( int ele : adj[src] ){
              DFS( ele , dest ,vis , temp ,adj );
         }
         
+        
         vis[src] = false;
-        temp.remove(temp.size()-1 );
+        if( src != dest ){
+            temp.remove(temp.size()-1 );
+        }
+             
     }
     
     
