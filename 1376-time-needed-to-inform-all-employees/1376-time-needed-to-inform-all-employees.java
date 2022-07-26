@@ -1,63 +1,65 @@
 class Pair{
-    int nbr;
-    int wt;
     
-    Pair(int nbr , int wt){
-        this.nbr = nbr;
+    int dest , wt ;
+    
+    Pair( int dest , int wt ){
+        this.dest = dest;
         this.wt = wt;
     }
+    
 }
 
 class Graph{
     
     ArrayList<Pair> [] adj;
     
-    Graph(int n){
+    Graph( int n ){
         
         adj = new ArrayList[n];
         
-        for( int i=0; i<n ; i++){
+        for( int i=0 ; i<n ; i++ ){
             adj[i] = new ArrayList<>();
         }
+        
     }
     
-    public void addEdge(int src , int dest , int wt ){
-        adj[src].add(new Pair(dest , wt));
+    public void addEdge( int src , int dest , int wt ){
+        adj[src].add(new Pair( dest , wt ));
     }
+    
 }
 
 class Solution {
     
-    public int DFS( Graph g , int t , int headID ){
+    public int DFS(int headId , Graph g , int srct ){
         
-        int maxt = t;
+        int max = 0;
         
-        for( Pair ele : g.adj[headID] ){
-           maxt = Math.max( maxt , DFS( g , t+ele.wt , ele.nbr )) ;
+        for( Pair ele : g.adj[headId] ){
+            max = Math.max( max , DFS(ele.dest , g , ele.wt));
         }
         
-        return maxt;
+        return max+srct;
+        
     }
     
-    
-    public int numOfMinutes(int n, int headID, int[] manager, int[] informTime) {
+    public int numOfMinutes( int n, int headID, int[] manager, int[] informTime ) {
         
+        int srct = 0;
         Graph g = new Graph(n);
-        int time = 0;
         
-        for( int i=0; i<n ; i++ ){//i for child , arr[i] = parent
+        for( int i = 0 ; i<n ; i++ ){
             
             if( manager[i] == -1 ){
-                time = informTime[i];
-                
+                srct = informTime[i];
             }else{
-               g.addEdge(manager[i], i , informTime[i] ) ;
-                
+                g.addEdge( manager[i] , i , informTime[i] );
             }
             
         }
         
-        return DFS( g , time , headID );
-
+        return DFS(headID , g , srct );
+        
+        
     }
 }
