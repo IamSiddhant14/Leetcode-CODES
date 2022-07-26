@@ -1,37 +1,39 @@
 class Solution {
     
-    public void DFS( int r , int c , char[][] grid ){
+    static int[][] dir = { {1,0} , {0,1} , {-1,0} , {0,-1} };
+
+    public void DFS(int i , int j , char[][] grid ){
         
-        if( r < 0 || c < 0 || r >= grid.length || c >= grid[0].length || grid[r][c] == '0' || grid[r][c] == 'N' ){
-            return ;
+        if( i < 0 || j < 0  || i >= grid.length || j >= grid[0].length  || grid[i][j] == 'N' || grid[i][j] == '0' ){
+            return;
         }
         
-        grid[r][c] = 'N';
+        grid[i][j] = 'N';
         
-        DFS( r+1 , c , grid );
-        DFS( r-1 , c , grid );
-        DFS( r , c-1 , grid );
-        DFS( r , c+1 , grid );
-
+        for( int k =0 ; k<dir.length ; k++ ){
+           DFS( i+dir[k][0] , j+dir[k][1] , grid ) ;
+        }
+        
     }
     
-    public int numIslands(char[][] grid) { 
+    public int numIslands(char[][] grid) {
         
         int count = 0;
+        
         for( int i = 0; i<grid.length ; i++ ){
+            
             for( int j = 0; j<grid[0].length ; j++ ){
                 
-                if( grid[i][j] == '1'){
+                if( grid[i][j] == '1' ){
+                    
                     DFS( i , j , grid );
-                    count++;
+                    count += 1;
+                    
                 }
-                
             }
         }
         
         return count;
         
     }
-    
-    
 }
