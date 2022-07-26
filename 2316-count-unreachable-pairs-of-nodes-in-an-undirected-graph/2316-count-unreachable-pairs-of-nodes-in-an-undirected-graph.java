@@ -59,7 +59,7 @@ class Solution {
          }
       }
         
-      return count / 2l ;
+      return count / 2 ;
 
     }
 }
