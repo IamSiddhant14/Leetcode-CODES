@@ -1,48 +1,55 @@
 class Solution {
-    int[][] dir = {{1,0} , {-1, 0} , {0 , 1} , {0 , -1}};
     
-    public void DFS( int r , int c , boolean[][] vis , int[][] height){
+    int[][] dir = {{1,0} , {-1, 0} ,{0,-1} ,{0,1}};
+    
+    public void DFS( int i , int j , int[][] heights , boolean[][] vis ){
         
-        if( vis[r][c] == true ) return;
-        vis[r][c] = true;
         
-        for( int i=0 ; i<4 ; i++ ){
+        if( vis[i][j] == true ) return ;
+        vis[i][j] = true;
+        
+        for(int k =0; k<dir.length ; k++ ){
             
-            int nr = r + dir[i][0];
-            int nc = c + dir[i][1];
+            int r = i+dir[k][0];
+            int c = j+dir[k][1];
+            if( r < 0 || c < 0 || r >= heights.length || c >= heights[0] .length ) continue;
             
-            if( nr < 0 || nc < 0 || nr >= height.length || nc >= height[0] .length ) continue;
-            
-            if( height[nr][nc] >= height[r][c]  ){
-                DFS( nr , nc , vis , height );
+            if( heights[r][c] >= heights[i][j] ){
+                DFS( r , c , heights , vis );
             }
+            
         }
         
-        
     }
-    public List<List<Integer>> pacificAtlantic(int[][] heights) {
+    
+    
+    public List<List<Integer>> pacificAtlantic(int[][] heights ) {
         
-        int n = heights.length ; int m = heights[0].length;
-        boolean[][] paf = new boolean[n][m];
+        int r = heights.length;
+        int c = heights[0].length;
         
-        for( int i = 0 ; i<m ; i++ )DFS(0 , i , paf , heights );//Top row
-        for( int i = 0 ; i<n ; i++ )DFS(i , 0 , paf , heights );//First col
+        boolean[][] p = new boolean[r][c];
         
-        boolean[][] atl = new boolean[n][m];
+        for( int i = 0; i<c ; i++ ) DFS( 0 , i , heights , p );
+        for( int i = 0; i<r ; i++ ) DFS( i , 0 , heights , p );
         
-        for( int i = 0 ; i<m ; i++ )DFS(n-1 , i , atl , heights );//Bottom
-        for( int i = 0 ; i<n ; i++ )DFS(i , m-1 , atl , heights );//Right
+        
+        boolean[][] a = new boolean[r][c];
+        
+        for( int i = 0; i<c ; i++ ) DFS( r-1 , i , heights , a );
+        for( int i = 0; i<r ; i++ ) DFS( i , c-1 , heights , a );
         
         List<List<Integer>> ans = new ArrayList<>();
         
-        for( int i = 0; i<n ; i++ ){
-           for( int j = 0 ; j<m ; j++ ){
-               if( paf[i][j] == true && atl[i][j] == true ){
-                   List<Integer> a = new ArrayList<>();
-                   a.add(i) ; a.add(j);
-                   ans.add(a);
-               }
-           }
+        for( int i =0; i<r ; i++ ){
+            for(int j =0; j<c ; j++ ){
+                if( p[i][j] == true && a[i][j] == true ){
+                    List<Integer> temp = new ArrayList<>();
+                    temp.add(i);
+                    temp.add(j);
+                    ans.add(temp);
+                }
+            }
         }
         
         return ans;
