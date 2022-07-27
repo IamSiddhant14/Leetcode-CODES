@@ -62,22 +62,18 @@ class Solution {
             }
         } 
         
-       int component = count; 
+        
+       int present = connections.length;
+       int extra = present - ((n-1)-(count-1));
        int req = count-1;
         
-       int extra = connections.length - ( (n-1) - (component-1)) ; 
-       if( connections.length < n-1 ){
-            return -1;
-       }   
-        
-       if( extra >= req ){
-             return req;
+       if( extra < req ){
+           return -1;
+       }else if( extra >= req ){
+           return req;
        }
-        
-       return  -1;
-        
 
-        
+        return -1;
         
         
     }
