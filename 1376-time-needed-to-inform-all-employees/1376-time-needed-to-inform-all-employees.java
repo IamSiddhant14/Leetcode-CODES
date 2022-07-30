@@ -1,18 +1,19 @@
 class Pair{
     
-    int dest , wt ;
+    int dest ;
+    int t;
     
-    Pair( int dest , int wt ){
+    Pair( int dest , int t ){
         this.dest = dest;
-        this.wt = wt;
+        this.t = t;
     }
     
 }
 
 class Graph{
     
-    ArrayList<Pair> [] adj;
-    
+    ArrayList<Pair> [] adj ;
+       
     Graph( int n ){
         
         adj = new ArrayList[n];
@@ -20,46 +21,46 @@ class Graph{
         for( int i=0 ; i<n ; i++ ){
             adj[i] = new ArrayList<>();
         }
-        
+            
     }
-    
-    public void addEdge( int src , int dest , int wt ){
-        adj[src].add(new Pair( dest , wt ));
+     
+    public void addEdge( int src ,int dest , int t ){
+        adj[src].add(new Pair (dest , t ));
     }
     
 }
 
 class Solution {
     
-    public int DFS(int headId , Graph g , int srct ){
+    public int findAns( int headID , Graph g , int t ){
         
         int max = 0;
         
-        for( Pair ele : g.adj[headId] ){
-            max = Math.max( max , DFS(ele.dest , g , ele.wt));
+        for( Pair ele : g.adj[headID] ){
+            max = Math.max( max , findAns( ele.dest , g , ele.t ));
         }
         
-        return max+srct;
+        return max+t;
+        
         
     }
     
-    public int numOfMinutes( int n, int headID, int[] manager, int[] informTime ) {
+    public int numOfMinutes(int n, int headID, int[] manager, int[] informTime) {
         
-        int srct = 0;
+        int t = 0;
         Graph g = new Graph(n);
         
-        for( int i = 0 ; i<n ; i++ ){
+        for( int i=0 ; i<n ; i++ ){
             
             if( manager[i] == -1 ){
-                srct = informTime[i];
+                t = informTime[i];  
             }else{
-                g.addEdge( manager[i] , i , informTime[i] );
+                g.addEdge( manager[i] , i , informTime[i] );   
             }
             
         }
         
-        return DFS(headID , g , srct );
-        
-        
+        return findAns( headID , g , t );
+
     }
 }
