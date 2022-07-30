@@ -11,9 +11,9 @@ class Solution {
                 
         if( src == dest ){
             ans.add(new ArrayList<>(temp));
-            vis[src] = false;
-            temp.remove(temp.size()-1 );
-            return;
+            // vis[src] = false;
+            // temp.remove(temp.size()-1 );
+            // return;
         } 
         
         for( int ele : adj[src] ){
@@ -22,9 +22,9 @@ class Solution {
         
         
         vis[src] = false;
-        if( src != dest ){
+        // if( src != dest ){
             temp.remove(temp.size()-1 );
-        }
+        // }
              
     }
     
