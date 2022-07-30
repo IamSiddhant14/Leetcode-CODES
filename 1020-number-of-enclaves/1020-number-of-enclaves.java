@@ -1,6 +1,7 @@
 class Solution {
     
     int count = 0;
+    int[][] dir = {{1,0} , {0,1} , {-1,0} , {0,-1} };
     
     public void DFS( int r , int c , int[][] grid ){
         
@@ -11,11 +12,13 @@ class Solution {
         grid[r][c] = -1;
         count++;
         
-        DFS( r+1 , c , grid );
-        DFS( r-1 , c , grid );
-        DFS( r , c-1 , grid );
-        DFS( r , c+1 , grid );
         
+        for( int i =0; i<dir.length ; i++ ){
+            int rb = dir[i][0];
+            int cb = dir[i][1];
+            
+            DFS( r+rb , c+cb , grid );
+        }
     }
     
     public int numEnclaves(int[][] grid) {
