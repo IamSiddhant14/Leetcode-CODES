@@ -2,7 +2,7 @@ class Solution {
     
     public int[][] kClosest(int[][] points, int k) {
         
-        PriorityQueue<pair> p = new PriorityQueue<> ( new Ecu() );
+        PriorityQueue <pair> p = new PriorityQueue<> ( new Ecu() );
         
         for( int i = 0; i<points.length ; i++ ){
             
@@ -28,8 +28,10 @@ class Solution {
         return ans;
         
     }
-    
-    static class Ecu implements Comparator<pair> {
+ 
+}
+
+ class Ecu implements Comparator<pair> {
         
         public int compare ( pair a1 , pair a2 ){
             
@@ -46,9 +48,6 @@ class Solution {
         }
     }
     
-    static class pair {
+class pair {
         int x = 0 , y = 0;
     }
-    
-    
-}
