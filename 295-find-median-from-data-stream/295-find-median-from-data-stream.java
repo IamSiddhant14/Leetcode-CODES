@@ -1,56 +1,53 @@
 class MedianFinder {
     
-    PriorityQueue<Integer> left , right;
-    
+    PriorityQueue <Integer> left , right ;
 
     public MedianFinder() {
         
-        left = new PriorityQueue<>(Collections.reverseOrder());//max heap
-        right = new PriorityQueue<>();//min heap
+        left = new PriorityQueue<>(Collections.reverseOrder());
+        right = new PriorityQueue<>();
         
     }
     
-    public void addNum(int nums) {
-        // Insertion
+    public void addNum(int num) {
+        
         double med = findMedian();
         
-        if( nums <= med ){
-            left.add(nums);
-            
-        }else{
-            right.add(nums);
-            
+        if( num <= med ){
+            left.add(num);
         }
         
-        // Balancing
-        if( left.size() == right.size()+2 ){
-            right.add(left.remove());
-            
-        }else if( left.size()+2 == right.size() ){
-            left.add(right.remove());
-            
+        if( num > med ){
+            right.add(num);
         }
-
+        
+        if( left.size()+2 == right.size() ){
+            int n = right.remove();
+            left.add(n);
+        }
+        
+        if( left.size()== right.size()+2  ){
+            int n = left.remove();
+            right.add(n);
+        }
         
     }
     
     public double findMedian() {
-                if(left.size() + right.size() == 0) return -1;
         
-        if(left.size() == right.size()){
-            return (left.peek() + right.peek()) / 2.0;
-        } else if(left.size() == right.size() + 1){
-            return left.peek();
-        } else {
-            return right.peek();
+        if( left.size() + right.size() == 0 ) return -1l ;
+        
+        if( left.size() == right.size() ) {
+            double v = left.peek()+right.peek();
+            return v/2.0;
         }
         
+        if( left.size() + 1 == right.size() ){
+            return right.peek();
+        }else{
+             return left.peek();
+        }
+                
     }
 }
 
-/**
- * Your MedianFinder object will be instantiated and called as such:
- * MedianFinder obj = new MedianFinder();
- * obj.addNum(num);
- * double param_2 = obj.findMedian();
- */
