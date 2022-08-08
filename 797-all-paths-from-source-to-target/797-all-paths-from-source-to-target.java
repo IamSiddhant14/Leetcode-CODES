@@ -2,42 +2,34 @@ class Solution {
     
     List<List<Integer>> ans = new ArrayList<>();
     
-    public void DFS( int src , int dest , boolean[] vis , List<Integer> temp , int[][] adj ){
+    public void DFS( int src , int dest , List<Integer> temp , int[][] g , boolean [] vis ){
         
-        if( vis[src] == true ) return  ;
-
+        if( vis[src] == true ) return;
         vis[src] = true;
+        
         temp.add(src);
-                
+        
         if( src == dest ){
             ans.add(new ArrayList<>(temp));
-            // vis[src] = false;
-            // temp.remove(temp.size()-1 );
-            // return;
-        } 
-        
-        for( int ele : adj[src] ){
-             DFS( ele , dest ,vis , temp ,adj );
         }
         
+        for( int ele : g[src]){
+            DFS( ele , dest , temp , g , vis );
+        }
         
+        temp.remove( temp.size()-1 );
         vis[src] = false;
-        // if( src != dest ){
-            temp.remove(temp.size()-1 );
-        // }
-             
+        
     }
-    
     
     public List<List<Integer>> allPathsSourceTarget(int[][] graph) {
         
-        List<Integer> temp = new ArrayList<>();
         boolean[] vis = new boolean[graph.length];
         
-        DFS( 0 , graph.length-1, vis , temp , graph);
+        List<Integer> temp = new ArrayList<>();
+        DFS( 0  , graph.length-1 , temp , graph , vis );
         
         return ans;
-
+        
     }
-    
 }
