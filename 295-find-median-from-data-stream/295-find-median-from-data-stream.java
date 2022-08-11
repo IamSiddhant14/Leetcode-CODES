@@ -39,7 +39,7 @@ class MedianFinder {
         
         if( left.size() == right.size() ) {
             double v = left.peek()+right.peek();
-            return v/2.0;
+            return v/2;
         }
         
         if( left.size() + 1 == right.size() ){
