@@ -1,29 +1,32 @@
 class Solution {
-    public int findMaxLength(int[] arr) {
+    public int findMaxLength(int[] nums) {
         
-        HashMap <Integer , Integer> hm = new HashMap <>();
+        HashMap<Integer , Integer> hm = new HashMap<>();
         hm.put( 0 , -1 );
         
         int sum = 0;
-        int longest = 0;
+        int l = 0;
         
-        for( int i=0 ; i<arr.length ; i++ ){
+        for( int i =0; i<nums.length ; i++ ){
             
-            if( arr[i] == 0 ){
+            if( nums[i] == 0 ){
                 sum += -1;
                 
             }else{
-                sum += arr[i];
+                sum += 1;
                 
             }
             
-            longest = Math.max( longest , i - hm.getOrDefault( sum , i ));
+            l = Math.max( l , i - hm.getOrDefault(sum , i));
             if( hm.containsKey(sum) == false ){
                 hm.put( sum , i );
-            }
+            }  
             
         }
         
-        return longest;
+        return l;
+        
+        
+        
     }
 }
