@@ -10,57 +10,59 @@
  */
 class Solution {
     
-    public ListNode merger (ListNode list1, ListNode list2) {
+  public ListNode mergeTwoLists(ListNode list1, ListNode list2) {
         
         ListNode ans = new ListNode(-1);
-        
-        ListNode h = ans;
-        ListNode t = ans;
+        ListNode t = ans ;
+        ListNode h = ans ;
         
         while( list1 != null && list2 != null ){
             
-            if( list1.val <= list2.val ){
+            int v1 = list1.val ;
+            int v2 = list2.val ;
+            
+            if( v1 < v2 ){
                 t.next = list1;
                 list1 = list1.next;
+                
             }else{
                 t.next = list2;
                 list2 = list2.next;
+                
             }
             
             t = t.next;
-            
         }
         
-        if( list1 != null ){
+        if( list1 != null){
             t.next = list1;
-        }else{
+        }
+        
+        if( list2 != null ){
             t.next = list2;
         }
         
-        return ans.next;
+        return h.next;
     }
     
-    
-    public ListNode mergerHelper(ListNode[] lists , int left , int right){
+    public ListNode mergerHelper( int start , int end , ListNode[] lists ){
         
-        if( left == right ) return lists[right];
+        if( start == end ){
+            return lists[start];
+        }
         
-        int mid = (left + right) / 2;
+        int mid = (start + end ) / 2 ;
         
-        ListNode l1 = mergerHelper( lists , left , mid );
-        ListNode l2 = mergerHelper( lists , mid+1 , right );
+        ListNode l1 = mergerHelper( start , mid , lists );
+        ListNode l2 = mergerHelper( mid+1 , end , lists );
         
-        ListNode ans = merger( l1 , l2 );
-        return ans;
-        
-        
-        
+        return mergeTwoLists( l1 , l2 );
     }
     
     public ListNode mergeKLists(ListNode[] lists) {
         
-        if( lists.length == 0 ) return null;
+        if( lists.length == 0 ) return null;        
+        return mergerHelper( 0 , lists.length-1 , lists );
         
-        return mergerHelper( lists , 0 , lists.length-1 );
     }
 }
