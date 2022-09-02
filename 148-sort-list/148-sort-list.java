@@ -10,17 +10,18 @@
  */
 class Solution {
     
-    public ListNode findMid(ListNode head){
+    public ListNode Mid( ListNode a ){
         
-        ListNode s = head;
-        ListNode f = head;
         ListNode prev = null;
+        ListNode s = a;
+        ListNode f = a;
         
         while( f != null && f.next != null ){
             
             prev = s;
             s = s.next;
-            f= f.next.next;
+            f = f.next.next;
+            
         }
         
         if( f == null ){
@@ -28,47 +29,43 @@ class Solution {
         }
         
         return s;
- 
+        
     }
     
-    public ListNode merger( ListNode l1 , ListNode l2 ){
+    public ListNode mergeTwoLists(ListNode list1, ListNode list2) {
         
         ListNode ans = new ListNode(-1);
-        ListNode t = ans;
+        ListNode t = ans ;
+        ListNode h = ans ;
         
-        while( l1 != null && l2 != null ){
+        while( list1 != null && list2 != null ){
             
-            if( l1.val <= l2.val ){
-                
-              t.next = l1;
-              l1 = l1.next;
+            int v1 = list1.val ;
+            int v2 = list2.val ;
+            
+            if( v1 < v2 ){
+                t.next = list1;
+                list1 = list1.next;
                 
             }else{
-                
-              t.next = l2;
-              l2 = l2.next; 
+                t.next = list2;
+                list2 = list2.next;
                 
             }
-
+            
             t = t.next;
-            
         }
         
-        if( l1 != null ){
-            t.next = l1;
-            // l1.next = null;
-            
+        if( list1 != null){
+            t.next = list1;
         }
         
-        if( l2 != null ){
-            t.next = l2;
-            // l2.next = null;
+        if( list2 != null ){
+            t.next = list2;
         }
         
-        return ans.next;
-        
+        return h.next;
     }
-    
     
     public ListNode sortList(ListNode head) {
         
@@ -76,16 +73,16 @@ class Solution {
             return head;
         }
         
-        ListNode mid = findMid(head);
-        ListNode midNext = mid.next;
-        mid.next = null ;
+        ListNode m = Mid( head );
+        ListNode a1 = head;
         
+        ListNode a2 = m.next;
+        m.next = null;
         
-        ListNode l = sortList(head);
-        ListNode r = sortList(midNext);
+        ListNode q1 = sortList(a1);
+        ListNode q2 = sortList(a2);
         
-        
-        return merger( l , r );
+        return mergeTwoLists( q1 , q2 );
         
     }
 }
