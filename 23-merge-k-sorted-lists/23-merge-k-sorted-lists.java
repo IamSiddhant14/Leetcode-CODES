@@ -10,59 +10,60 @@
  */
 class Solution {
     
-  public ListNode mergeTwoLists(ListNode list1, ListNode list2) {
+    public ListNode mergeSort( ListNode a1 , ListNode a2 ){
         
         ListNode ans = new ListNode(-1);
-        ListNode t = ans ;
-        ListNode h = ans ;
+        ListNode t = ans;
         
-        while( list1 != null && list2 != null ){
+        while( a1 != null && a2 != null ){
             
-            int v1 = list1.val ;
-            int v2 = list2.val ;
+            int v1 = a1.val ;
+            int v2 = a2.val ;
             
             if( v1 < v2 ){
-                t.next = list1;
-                list1 = list1.next;
+                t.next = a1;
+                a1 = a1.next;
+                t = t.next;
                 
             }else{
-                t.next = list2;
-                list2 = list2.next;
+                t.next = a2;
+                a2 = a2.next;
+                t = t.next;
                 
             }
             
+        }
+        
+        if( a1 != null ){
+            t.next = a1;
             t = t.next;
         }
         
-        if( list1 != null){
-            t.next = list1;
+        if( a2 != null ){
+            t.next = a2;
+            t = t.next;
         }
         
-        if( list2 != null ){
-            t.next = list2;
-        }
-        
-        return h.next;
+        return ans.next;
     }
     
-    public ListNode mergerHelper( int start , int end , ListNode[] lists ){
+    
+    public ListNode mergeHelper( int start , int end , ListNode[] lists ){
         
         if( start == end ){
-            return lists[start];
+            return lists[end];
         }
         
-        int mid = (start + end ) / 2 ;
+        int mid = ((start + end )/ 2) ;
         
-        ListNode l1 = mergerHelper( start , mid , lists );
-        ListNode l2 = mergerHelper( mid+1 , end , lists );
+        ListNode a1 = mergeHelper( start , mid , lists );
+        ListNode a2 = mergeHelper( mid+1 , end , lists );
         
-        return mergeTwoLists( l1 , l2 );
+        return mergeSort( a1 , a2 );
     }
     
     public ListNode mergeKLists(ListNode[] lists) {
-        
-        if( lists.length == 0 ) return null;        
-        return mergerHelper( 0 , lists.length-1 , lists );
-        
+        if( lists.length == 0 ) return null ;
+        return mergeHelper( 0 , lists.length -1 , lists);
     }
 }
