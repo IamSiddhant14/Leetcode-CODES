@@ -10,75 +10,72 @@
  */
 class Solution {
     
-    public int length(ListNode head){
+    public int size( ListNode head ){
         
-        ListNode curr = head;
-        int l = 0;
+        int c = 0;
         
-        while( curr != null ){
-            curr = curr.next;
-            l++;
+        while( head != null ){
+            head = head.next;
+            c++;
         }
         
-        return l;
+        return c;
+        
     }
     
-    public ListNode th = null;
-    public ListNode tt = null;
+    ListNode th = null;
+    ListNode tt = null;
     
-    public void addFirst(ListNode node){
+    public void addFirst( ListNode head ){
         
         if( th == null ){
-            th = node;
-            tt = node;
+            th = head;
+            tt = head;
+            
         }else{
-            node.next = th;
-            th = node;
+            head.next = th;
+            th = head;
+            
         }
+        
     }
+    
     
     public ListNode reverseKGroup(ListNode head, int k) {
         
-        ListNode oh = null ;
+        if( head == null || head.next == null || k > size(head) ){
+            return head;
+        }
+        
+        ListNode oh = null;
         ListNode ot = null;
         
-        int len = length(head);
-        ListNode curr = head;
-        
-        while( len >= k){
+        while( size(head) >= k ){
             
             for( int i = 0; i<k ; i++ ){
-                
-                ListNode frw = curr.next;
-                curr.next = null;
-                
-                addFirst(curr);
-                curr = frw;
+                ListNode frw = head.next;
+                head.next = null;
+                addFirst(head);
+                head = frw;
             }
             
             if( oh == null ){
-                oh = th ;
-                ot = tt ;
+                oh = th;
+                ot = tt;
+                
             }else{
                 ot.next = th;
+                ot = tt;
             }
-            
-            ot = tt;
-            ot.next = null;
-            
+
             th = null;
             tt = null;
-            
-            len -= k;
-            
         }
-        
-        if(len > 0 ){
-            ot.next = curr;
+       
+        if( head != null ){
+            ot.next = head;
         }
-        
+         
         return oh;
-        
-        
     }
 }
