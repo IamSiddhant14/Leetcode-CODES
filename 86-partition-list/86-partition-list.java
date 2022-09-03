@@ -11,33 +11,37 @@
 class Solution {
     public ListNode partition(ListNode head, int x) {
         
-        ListNode lhead = new ListNode(-1);
-        ListNode ltail = lhead;
+        ListNode l = new ListNode(-1);
+        ListNode lh = l;
+        ListNode lt = l;
         
-        ListNode rhead = new ListNode(-1);
-        ListNode rtail = rhead;
-        
-
+        ListNode r = new ListNode(-1);
+        ListNode rt = r;
+        ListNode rh = r;
         
         while( head != null ){
             
             int v = head.val;
             
             if( v < x ){
-                ltail.next = head;
-                ltail = ltail.next;
+                
+                lt.next = head;
+                lt = lt.next;
+                
             }else{
-                rtail.next = head;
-                rtail = rtail.next;
+                
+                rt.next = head;
+                rt = rt.next;
+                
             }
             
             head = head.next;
         }
         
-        rtail.next = null;
-        ltail.next= rhead.next;
+        lt.next = rh.next;
+        rt.next = null;
         
-        return lhead.next;
+        return lh.next;
         
     }
 }
