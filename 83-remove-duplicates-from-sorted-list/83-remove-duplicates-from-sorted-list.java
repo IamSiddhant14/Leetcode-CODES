@@ -16,18 +16,17 @@ class Solution {
 
         while( head != null ){
             
-           if( t.val != head.val ){
-               t.next = head;
-               t=t.next;
-           }
+            if( t.val != head.val ){
+                
+                t.next = head;
+                t = t.next;
+                
+            }
             
-         head = head.next;
             
+            head = head.next;
         }
-        
         t.next = null;
-        
         return ans.next;
-        
     }
 }
